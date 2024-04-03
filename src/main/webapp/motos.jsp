@@ -34,7 +34,7 @@
 						<tr>
 							<td>${m.idMoto }</td>
 							<td>${m.nomMoto }</td>
-							<td>${p.prix }</td>
+							<td>${m.prix }</td>
 							<td><a onclick="return confirm('Etes-vous sûr ?')" href="supprimer.do?id=${m.idMoto }">Supprimer</a></td>
  							<td><a href="editer.do?id=${m.idMoto }">Edit</a></td>
 						</tr>
