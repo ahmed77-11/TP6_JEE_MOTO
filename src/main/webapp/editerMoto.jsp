@@ -19,18 +19,26 @@
 			<div class="card-body">
 				<form action="update.do" method="post">
 					<div hidden class="form-group">
-						<label class="control-label">ID Moto :</label> <input
-							type="text" name="id" class="form-control"
-							value="${moto.idMoto}" />
+						<label class="control-label">ID Moto :</label> <input type="text"
+							name="id" class="form-control" value="${moto.idMoto}" />
 					</div>
 					<div class="form-group">
-						<label class="control-label">Nom Moto :</label> <input
-							type="text" name="nom" class="form-control"
-							value="${moto.nomMoto}" />
+						<label class="control-label">Nom Moto :</label> <input type="text"
+							name="nom" class="form-control" value="${moto.nomMoto}" />
 					</div>
 					<div class="form-group">
 						<label class="control-label">Prix :</label> <input type="text"
 							name="prix" class="form-control" value="${moto.prix}" />
+					</div>
+					<div class="form-group">
+						<select name="model" class="form-control">
+							<option value="${moto.model.idModel}" selected>${moto.model.nomModel}</option>
+							<c:forEach items="${moModele.models}" var="modele">
+								<c:if test="${modele.idModel != moto.model.idModel}">
+									<option value="${modele.idModel}">${modele.nomModel}</option>
+								</c:if>
+							</c:forEach>
+						</select>
 					</div>
 					<div>
 						<button type="submit" class="btn btn-primary">Modifier</button>

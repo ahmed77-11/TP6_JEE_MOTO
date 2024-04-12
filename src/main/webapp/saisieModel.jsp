@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=windows-1256">
-<title>Insert title here</title>
+<title>Saisie Catégorie</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -15,32 +15,22 @@
 	<p></p>
 	<div class="container">
 		<div class="card">
-			<div class="card-header">Saisie des Motos</div>
+			<div class="card-header">Saisie des Model</div>
 			<div class="card-body">
-				<form action="save.do" method="post">
+				<form action="saveModel" method="post">
 					<div class="form-group">
-						<label class="control-label">Nom Moto :</label> <input type="text"
-							name="nom" class="form-control" />
+						<label class="control-label">Nom Model :</label> <input
+							type="text" name="nom" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label class="control-label">Prix :</label> <input type="text"
-							name="prix" class="form-control" />
-					</div>
-					<div class="form-group">
-						<select name="model" class="form-control">
-							<c:forEach items="${moModele.models}" var="modele">
-								<option value="${modele.idModel}">${modele.nomModel}</option>
-							</c:forEach>
-						</select>
+						<label class="control-label">Date Model : </label> <input
+							type="date" name="dateMod" class="form-control"></input>
 					</div>
 					<div>
 						<button type="submit" class="btn btn-primary">Ajouter</button>
 					</div>
-					
 				</form>
-
 			</div>
 		</div>
 	</div>
 </body>
-</html>

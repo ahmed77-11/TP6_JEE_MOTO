@@ -21,14 +21,24 @@ public class Moto implements Serializable{
 	@Column(name="NOM_MOTO")
 	private String nomMoto;
 	private double prix;
+	private Model model;
+
+	public Model getModel() {
+		return model;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
+	}
 
 	public Moto() {
 		super();
 	}
 
-	public Moto(String nomMoto, double prix) {
+	public Moto(String nomMoto, double prix,Model m) {
 		this.nomMoto = nomMoto;
 		this.prix = prix;
+		this.model=m;
 	}
 
 	public Long getIdMoto() {

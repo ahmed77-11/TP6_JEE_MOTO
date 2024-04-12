@@ -11,15 +11,20 @@ import org.apache.catalina.connector.Response;
 
 import dao.IMotoDao;
 import dao.MotoDaoImp;
+import dao.IModelDao;
+import dao.ModelDaoImpl;
+import metier.entities.Model;
 import metier.entities.Moto;
 
 @WebServlet(name = "cs", urlPatterns = { "/controleur", "*.do" })
 public class ControleurServlet extends HttpServlet {
 	IMotoDao metier;
+	IModelDao metierMod;
 
 	@Override
 	public void init() throws ServletException {
 		metier = new MotoDaoImp();
+		metierMod=new ModelDaoImpl();
 	}
 
 	@Override
@@ -37,11 +42,23 @@ public class ControleurServlet extends HttpServlet {
 			request.setAttribute("model", model);
 			request.getRequestDispatcher("motos.jsp").forward(request, response);
 		} else if (path.equals("/saisie.do")) {
+			List<Model> models = metierMod.getAllModels();
+			ModelModele mo= new ModelModele();
+			mo.setModels(models);
+			request.setAttribute("moModele", mo);
+
 			request.getRequestDispatcher("saisieMoto.jsp").forward(request, response);
 		} else if (path.equals("/save.do") && request.getMethod().equals("POST")) {
 			String nom = request.getParameter("nom");
+			Long modelId=Long.parseLong(request.getParameter("model"));
+			System.out.print(modelId);
 			double prix = Double.parseDouble(request.getParameter("prix"));
-			Moto m = metier.save(new Moto(nom, prix));
+			Model mode=metierMod.getModel(modelId);
+			/*
+			 * Moto mot = new Moto(); mot.setNomMoto(nom); mot.setPrix(prix);
+			 * mot.setModel(mode);
+			 */
+			Moto m = metier.save(new Moto(nom,prix,mode));
 			request.setAttribute("motos", m);
 			request.getRequestDispatcher("confirmation.jsp").forward(request, response);
 		} else if (path.equals("/supprimer.do")) {
@@ -52,15 +69,22 @@ public class ControleurServlet extends HttpServlet {
 			Long id = Long.parseLong(request.getParameter("id"));
 			Moto m = metier.getMoto(id);
 			request.setAttribute("moto", m);
+			List<Model> models = metierMod.getAllModels();
+			ModelModele mo= new ModelModele();
+			mo.setModels(models);
+			request.setAttribute("moModele", mo);
 			request.getRequestDispatcher("editerMoto.jsp").forward(request, response);
 		} else if (path.equals("/update.do")) {
 			Long id = Long.parseLong(request.getParameter("id"));
 			String nom = request.getParameter("nom");
 			double prix = Double.parseDouble(request.getParameter("prix"));
+			Long modelId=Long.parseLong(request.getParameter("model"));
 			Moto m = new Moto();
 			m.setIdMoto(id);
 			m.setNomMoto(nom);
 			m.setPrix(prix);
+			Model mode=metierMod.getModel(modelId);
+			m.setModel(mode);
 			metier.updateMoto(m);
 			request.setAttribute("moto", m);
 			request.getRequestDispatcher("confirmation.jsp").forward(request, response);

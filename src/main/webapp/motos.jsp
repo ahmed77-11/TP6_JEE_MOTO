@@ -29,12 +29,14 @@
 						<th>ID</th>
 						<th>Nom Motos</th>
 						<th>Prix</th>
+ 						<th>model</th>
 					</tr>
 					<c:forEach items="${model.motos}" var="m">
 						<tr>
 							<td>${m.idMoto }</td>
 							<td>${m.nomMoto }</td>
 							<td>${m.prix }</td>
+							<td>${m.model.nomModel }</td>
 							<td><a onclick="return confirm('Etes-vous sûr ?')" href="supprimer.do?id=${m.idMoto }">Supprimer</a></td>
  							<td><a href="editer.do?id=${m.idMoto }">Edit</a></td>
 						</tr>
